@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maths Feedback Quest | Year 5</title>
+<style>
+:root{
+ --ink:#26324b;--muted:#68748a;--purple:#7867d8;--teal:#329b91;
+ --pink:#e88db0;--yellow:#f4c85b;--line:rgba(112,126,160,.24);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:transparent!important}
+body{padding:16px;font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink)}
+button,input,textarea{font:inherit}
+.wrap{max-width:980px;margin:auto}
+.hero,.panel{border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);box-shadow:0 12px 30px rgba(54,66,105,.07)}
+.hero{text-align:center;padding:28px 22px;margin-bottom:16px;position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"✦";position:absolute;color:rgba(244,200,91,.7);font-size:36px}
+.hero:before{top:12px;left:20px}.hero:after{right:22px;bottom:10px}
+.kicker{display:inline-block;padding:7px 13px;border-radius:999px;background:rgba(120,103,216,.12);color:#5d4db7;font-size:11px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+h1{font-size:clamp(27px,5vw,42px);line-height:1.1;margin:13px 0 9px;color:#4c438c}
+.hero p{max-width:700px;margin:0 auto;color:var(--muted);line-height:1.65}
+.pills{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
+.pill{padding:8px 12px;border-radius:30px;background:rgba(120,103,216,.09);color:#5d5594;font-size:12px;font-weight:750}
+.progress-wrap{height:8px;border-radius:20px;background:rgba(120,103,216,.12);overflow:hidden;margin:18px auto 0;max-width:500px}
+.progress{height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--teal));transition:width .25s}
+.panel{padding:22px;margin-top:16px}
+.head{display:flex;gap:13px;align-items:center;margin-bottom:15px}
+.num{display:grid;place-items:center;flex:0 0 44px;height:44px;border-radius:15px;background:rgba(120,103,216,.13);color:#5d4db7;font-weight:900;font-size:17px}
+h2{font-size:21px;margin:0 0 5px}.sub{font-size:13px;color:var(--muted);line-height:1.5}
+.intro{padding:14px 15px;border-radius:15px;background:rgba(120,103,216,.07);line-height:1.6;font-size:14px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 0}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}
+.field input,.question textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.84);font-size:14px;color:var(--ink);outline-color:#9587e7}
+.question{padding:16px;border:1px solid var(--line);border-radius:17px;margin-top:12px;background:rgba(250,251,255,.62)}
+.question h3{font-size:14px;line-height:1.55;margin:0 0 12px}
+.question .hint{font-size:12px;color:var(--muted);margin:-5px 0 11px}
+.scale{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.scale label{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px 5px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.82);cursor:pointer;text-align:center;font-size:11px;min-height:66px}
+.scale label:has(input:checked){border-color:#8c7ce2;background:rgba(120,103,216,.12);box-shadow:0 0 0 2px rgba(120,103,216,.08)}
+.scale input{accent-color:var(--purple)}
+.scale .emoji{font-size:19px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.option{display:flex;align-items:center;gap:9px;padding:11px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.8);font-size:13px;cursor:pointer;line-height:1.4}
+.option:has(input:checked){border-color:#8c7ce2;background:rgba(120,103,216,.1)}
+.option input{accent-color:var(--purple);flex:0 0 auto}
+.question textarea{min-height:78px;resize:vertical;line-height:1.5}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+button{border:0;border-radius:12px;padding:12px 17px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .15s,filter .15s}
+button:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.primary{background:var(--purple);color:white}.soft{background:rgba(120,103,216,.1);color:#5d4db7;border:1px solid rgba(120,103,216,.18)}
+.result{display:none;margin-top:16px;padding:17px;border-radius:16px;background:rgba(84,185,165,.1);border:1px solid rgba(84,185,165,.35);font-size:14px;line-height:1.65}
+.result.show{display:block}.result h3{margin:0 0 5px;color:#287e76}
+.note{font-size:12px;color:var(--muted);line-height:1.55;margin-top:13px}
+.footer{text-align:center;color:var(--muted);font-size:11px;margin:18px 0 3px}
+.mini-title{font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.06em;color:#5d4db7;margin:17px 0 7px}
+button:disabled{opacity:.65;cursor:wait;transform:none}
+@media(max-width:650px){body{padding:8px}.hero{padding:24px 14px}.panel{padding:15px}.fields,.options{grid-template-columns:1fr}.scale{gap:4px}.scale label{font-size:10px;padding:8px 2px}.scale .emoji{font-size:16px}.question{padding:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Year 5 Mathematics · Student voice</div>
+  <h1>🌟 Maths Feedback Quest</h1>
+  <p><strong>Your Voice Matters!</strong><br>Complete the four mini-missions to tell us what helped you learn. There are no right or wrong answers in this quest—be honest and help make maths even better!</p>
+  <div class="pills"><span class="pill">⭐ Rate it</span><span class="pill">🎮 Share it</span><span class="pill">🧠 Challenge zone</span><span class="pill">📓 Reflect</span></div>
+  <div class="progress-wrap" aria-label="Completion progress"><div class="progress" id="progress"></div></div>
+  <div class="note" id="progressText">Your quest progress: 0%</div>
+</header>
+
+<section class="panel">
+  <div class="head"><div class="num">01</div><div><h2>🧭 Start Your Quest</h2><div class="sub">Tell us a little about yourself before beginning.</div></div></div>
+  <div class="intro">Your answers will help your teacher improve the learning website and activities. Please do not include private information. Your feedback will be recorded when you press Submit Quest.</div>
+  <div class="fields">
+    <div class="field"><label for="student">Name or learner code (optional)</label><input id="student" maxlength="80" placeholder="e.g. Student 01"></div>
+    <div class="field"><label for="className">Class (optional)</label><input id="className" maxlength="60" placeholder="e.g. 5 Bestari"></div>
+  </div>
+</section>
+
+<section class="panel" id="mission1">
+  <div class="head"><div class="num">02</div><div><h2>⭐ Mission 1 — Rate Your Learning</h2><div class="sub">Choose one face for each statement.</div></div></div>
+  <div class="intro">1 😟 Strongly Disagree · 2 🙁 Disagree · 3 😐 Not Sure · 4 🙂 Agree · 5 🤩 Strongly Agree</div>
+  <div id="ratingQuestions"></div>
+</section>
+
+<section class="panel" id="mission2">
+  <div class="head"><div class="num">03</div><div><h2>🎮 Mission 2 — Tell Us Your Favourite!</h2><div class="sub">Choose the activity you enjoyed most and tell us why.</div></div></div>
+  <div class="question">
+    <h3>1. Which activity did you enjoy the most?</h3>
+    <div class="options">
+      <label class="option"><input type="radio" name="favourite" value="Learning notes"> 📘 Learning notes</label>
+      <label class="option"><input type="radio" name="favourite" value="GeoGebra"> 🔷 GeoGebra</label>
+      <label class="option"><input type="radio" name="favourite" value="Polypad"> 🧩 Polypad</label>
+      <label class="option"><input type="radio" name="favourite" value="Maths games"> 🎮 Maths games</label>
+      <label class="option"><input type="radio" name="favourite" value="Quizzes"> 🏆 Quizzes</label>
+      <label class="option"><input type="radio" name="favourite" value="Other"> ✨ Other</label>
+    </div>
+  </div>
+  <div class="question"><h3>2. Why did you enjoy this activity?</h3><textarea id="favouriteWhy" maxlength="1200" placeholder="I enjoyed it because..."></textarea></div>
+</section>
+
+<section class="panel" id="mission3">
+  <div class="head"><div class="num">04</div><div><h2>🧠 Mission 3 — Challenge Zone</h2><div class="sub">Help us understand what was easy or difficult.</div></div></div>
+  <div class="question"><h3>1. Which topic was the most challenging?</h3>
+    <div class="options">
+      <label class="option"><input type="radio" name="challenge" value="Shapes"> 🔷 Shapes</label>
+      <label class="option"><input type="radio" name="challenge" value="Perimeter"> 📏 Perimeter</label>
+      <label class="option"><input type="radio" name="challenge" value="Area"> 🟪 Area</label>
+      <label class="option"><input type="radio" name="challenge" value="Combined shapes"> 🧩 Combined shapes</label>
+      <label class="option"><input type="radio" name="challenge" value="None"> 😊 None of these</label>
+      <label class="option"><input type="radio" name="challenge" value="Other / not sure"> 💭 Other / not sure</label>
+    </div>
+  </div>
+  <div class="question"><h3>2. What helped you understand mathematics better?</h3><textarea id="helped" maxlength="1200" placeholder="The activity/resource that helped me was..."></textarea></div>
+  <div class="question"><h3>3. What would you like to improve about this website?</h3><textarea id="improve" maxlength="1200" placeholder="I would like the website to..."></textarea></div>
+  <div class="question"><h3>4. Any other suggestions?</h3><textarea id="suggestions" maxlength="1200" placeholder="I suggest... (optional)"></textarea></div>
+</section>
+
+<section class="panel" id="mission4">
+  <div class="head"><div class="num">05</div><div><h2>📓 Mission 4 — Reflection Corner</h2><div class="sub">Finish the sentences. Short answers are welcome!</div></div></div>
+  <div class="question"><h3>1. Today, I learned...</h3><textarea id="reflectLearned" maxlength="1200" placeholder="Today, I learned..."></textarea></div>
+  <div class="question"><h3>2. The most interesting activity was...</h3><textarea id="reflectInteresting" maxlength="1200" placeholder="The most interesting activity was..."></textarea></div>
+  <div class="question"><h3>3. I found __________ challenging because...</h3><textarea id="reflectChallenge" maxlength="1200" placeholder="I found ... challenging because..."></textarea></div>
+  <div class="question"><h3>4. I can improve by...</h3><textarea id="reflectImprove" maxlength="1200" placeholder="I can improve by..."></textarea></div>
+  <div class="question"><h3>5. I am proud of myself because...</h3><textarea id="reflectProud" maxlength="1200" placeholder="I am proud of myself because..."></textarea></div>
+</section>
+
+<section class="panel">
+  <div class="head"><div class="num">★</div><div><h2>🚀 Finish the Quest</h2><div class="sub">Check your answers, then send your feedback to your teacher.</div></div></div>
+  <div class="intro">Thank you for helping us make mathematics more interactive, enjoyable and meaningful. Your honest ideas matter!</div>
+  <div class="actions">
+    <button class="primary" id="submitBtn" type="button" onclick="submitFeedback()">Submit Quest ✨</button>
+    <button class="soft" type="button" onclick="resetFeedback()">Start Again</button>
+  </div>
+  <div class="result" id="result" aria-live="polite"></div>
+  <p class="note">Your feedback is sent to the teacher's Google Sheets through Google Apps Script after the teacher connects the web app URL. Avoid entering sensitive personal information.</p>
+</section>
+<div class="footer">Think · Share · Reflect · Grow 🌱</div>
+</div>
+
+<script>
+// Paste the deployed Google Apps Script Web App URL ending in /exec.
+const SCRIPT_URL = "PASTE_YOUR_FEEDBACK_WEB_APP_URL_HERE";
+
+const ratingItems = [
+ "The learning notes were easy to understand.",
+ "GeoGebra helped me understand geometry.",
+ "Polypad made learning more interactive.",
+ "The maths games were enjoyable.",
+ "I feel more confident calculating area and perimeter."
+];
+const scaleLabels = [
+ {value:"1",emoji:"😟",label:"Strongly<br>Disagree"},
+ {value:"2",emoji:"🙁",label:"Disagree"},
+ {value:"3",emoji:"😐",label:"Not Sure"},
+ {value:"4",emoji:"🙂",label:"Agree"},
+ {value:"5",emoji:"🤩",label:"Strongly<br>Agree"}
+];
+
+function buildRatings(){
+ const holder=document.getElementById("ratingQuestions");
+ ratingItems.forEach((item,index)=>{
+  const q=document.createElement("div");q.className="question";
+  const h=document.createElement("h3");h.textContent=(index+1)+". "+item;q.appendChild(h);
+  const scale=document.createElement("div");scale.className="scale";
+  scaleLabels.forEach(s=>{
+   const label=document.createElement("label");
+   label.innerHTML='<input type="radio" name="rating'+(index+1)+'" value="'+s.value+'"><span class="emoji">'+s.emoji+'</span><span>'+s.label+'</span>';
+   scale.appendChild(label);
+  });
+  q.appendChild(scale);holder.appendChild(q);
+ });
+}
+buildRatings();
+
+function updateProgress(){
+ const total=5+1+1+5; // ratings + favourite choice + challenge choice + reflection prompts
+ let done=0;
+ for(let i=1;i<=5;i++)if(document.querySelector('input[name="rating'+i+'"]:checked'))done++;
+ if(document.querySelector('input[name="favourite"]:checked'))done++;
+ if(document.querySelector('input[name="challenge"]:checked'))done++;
+ ["reflectLearned","reflectInteresting","reflectChallenge","reflectImprove","reflectProud"].forEach(id=>{if(document.getElementById(id).value.trim())done++});
+ const pct=Math.round(done/total*100);
+ document.getElementById("progress").style.width=pct+"%";
+ document.getElementById("progressText").textContent="Your quest progress: "+pct+"%";
+}
+document.addEventListener("input",updateProgress);
+document.addEventListener("change",updateProgress);
+
+function getRadio(name){const el=document.querySelector('input[name="'+name+'"]:checked');return el?el.value:"";}
+function val(id){return document.getElementById(id).value.trim();}
+function showMessage(title,message){
+ const r=document.getElementById("result");r.className="result show";
+ const h=document.createElement("h3");h.textContent=title;
+ const p=document.createElement("p");p.textContent=message;
+ r.replaceChildren(h,p);r.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+async function submitFeedback(){
+ const ratings={};
+ for(let i=1;i<=5;i++){
+  ratings["rating"+i]=getRadio("rating"+i);
+  if(!ratings["rating"+i]){showMessage("One more step!","Please rate all five statements in Mission 1 before submitting.");document.getElementById("mission1").scrollIntoView({behavior:"smooth"});return;}
+ }
+ if(!getRadio("favourite")){showMessage("Choose your favourite!","Please select the activity you enjoyed most.");document.getElementById("mission2").scrollIntoView({behavior:"smooth"});return;}
+ if(!getRadio("challenge")){showMessage("Challenge Zone","Please select the topic you found most challenging, or choose 'None of these'.");document.getElementById("mission3").scrollIntoView({behavior:"smooth"});return;}
+ if(SCRIPT_URL==="PASTE_YOUR_FEEDBACK_WEB_APP_URL_HERE"){
+  showMessage("Connection needed","Your answers have not been sent. The teacher must paste the deployed Apps Script Web App URL into SCRIPT_URL first.");return;
+ }
+ const payload={
+  studentName:val("student"),className:val("className"),ratings,
+  favouriteActivity:getRadio("favourite"),favouriteWhy:val("favouriteWhy"),
+  challengingTopic:getRadio("challenge"),helped:val("helped"),improveWebsite:val("improve"),suggestions:val("suggestions"),
+  reflection:{learned:val("reflectLearned"),interesting:val("reflectInteresting"),challenge:val("reflectChallenge"),improve:val("reflectImprove"),proud:val("reflectProud")},
+  page:"Maths Feedback Quest - Year 5"
+ };
+ const btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="Sending your quest...";
+ try{
+  // Apps Script accepts this simple request. With no-cors, the browser cannot read the server response.
+  // Therefore the message says the request was sent, not that the server response was verified.
+  await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+  showMessage("Quest sent! 🌟","Thank you for sharing your voice. Your browser sent the feedback request. Your teacher should check the Google Sheets response tab to confirm it was recorded.");
+  document.querySelectorAll("input,textarea").forEach(el=>el.disabled=true);
+  btn.textContent="Quest Sent";
+ }catch(err){
+  showMessage("Connection problem","We could not send the request. Check your internet connection and the Apps Script deployment URL, then try again.");
+  btn.disabled=false;btn.textContent="Submit Quest ✨";
+ }
+}
+function resetFeedback(){
+ document.querySelectorAll("input,textarea").forEach(el=>{el.disabled=false;if(el.type==="radio")el.checked=false;else el.value="";});
+ const r=document.getElementById("result");r.className="result";r.replaceChildren();
+ const b=document.getElementById("submitBtn");b.disabled=false;b.textContent="Submit Quest ✨";updateProgress();
+}
+</script>
+</body>
+</html>
