@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Assessment | Year 5 Mathematics</title>
+<style>
+:root{--ink:#26324b;--muted:#68748a;--purple:#7867d8;--teal:#329b91;--line:rgba(112,126,160,.22)}
+*{box-sizing:border-box}html,body{margin:0;background:transparent}
+body{padding:20px;font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink)}
+.wrap{max-width:980px;margin:auto}
+.hero,.panel{border:1px solid var(--line);border-radius:23px;background:rgba(255,255,255,.76);backdrop-filter:blur(13px);box-shadow:0 12px 30px rgba(54,66,105,.06)}
+.hero{text-align:center;padding:28px 22px;margin-bottom:18px}
+.kicker{display:inline-block;padding:7px 13px;border-radius:999px;background:rgba(120,103,216,.12);color:#5d4db7;font-size:11px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+h1{font-size:clamp(27px,5vw,40px);margin:13px 0 8px}
+.hero p{max-width:700px;margin:0 auto;color:var(--muted);line-height:1.65}
+.pills{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:16px}
+.pill{padding:8px 12px;border-radius:30px;background:rgba(120,103,216,.09);color:#5d5594;font-size:12px;font-weight:750}
+.panel{padding:22px;margin-top:17px}
+.head{display:flex;gap:13px;align-items:center;margin-bottom:15px}
+.num{display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:14px;background:rgba(120,103,216,.13);color:#5d4db7;font-weight:900}
+h2{font-size:21px;margin:0 0 5px}.sub{font-size:13px;color:var(--muted);line-height:1.5}
+.intro{padding:15px;border-radius:15px;background:rgba(120,103,216,.07);line-height:1.6;font-size:14px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:17px 0}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}
+.field input{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.85);font:14px Arial;color:var(--ink)}
+.question{padding:16px;border:1px solid var(--line);border-radius:16px;margin-top:12px;background:rgba(250,251,255,.68)}
+.question h3{font-size:14px;line-height:1.55;margin:0 0 12px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.option{display:flex;align-items:center;gap:9px;padding:10px 11px;border:1px solid rgba(112,126,160,.2);border-radius:11px;background:rgba(255,255,255,.78);font-size:13px;cursor:pointer}
+.option:has(input:checked){border-color:#9587e7;background:rgba(120,103,216,.09)}
+.option input{accent-color:var(--purple)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}
+button{border:0;border-radius:11px;padding:12px 17px;font-weight:800;font-size:13px;cursor:pointer}
+button:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.primary{background:var(--purple);color:white}.soft{background:rgba(120,103,216,.1);color:#5d4db7;border:1px solid rgba(120,103,216,.18)}
+.result{display:none;margin-top:16px;padding:17px;border-radius:15px;background:rgba(84,185,165,.1);border:1px solid rgba(84,185,165,.35);font-size:14px;line-height:1.6}
+.result.show{display:block}.score{font-size:27px;font-weight:900;color:#287e76}
+.note{font-size:12px;color:var(--muted);line-height:1.55;margin-top:13px}
+.footer{text-align:center;color:var(--muted);font-size:11px;margin:18px 0 3px}
+button:disabled{opacity:.6;cursor:wait}
+@media(max-width:650px){body{padding:12px}.panel{padding:16px}.fields,.options{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="kicker">Year 5 Mathematics · Show what you have learned</div>
+  <h1>POST-ASSESSMENT</h1>
+  <p><strong>After Learning — Test Your Understanding!</strong><br>Answer the questions about shapes, perimeter, area and combined shapes. Read carefully and do your best!</p>
+  <div class="pills"><span class="pill">🔷 Shapes</span><span class="pill">📏 Perimeter</span><span class="pill">🟪 Area</span><span class="pill">🧩 Combined Shapes</span></div>
+</header>
+
+<section class="panel">
+  <div class="head"><div class="num">01</div><div><h2>Before You Begin</h2><div class="sub">Complete your details before answering.</div></div></div>
+  <div class="intro">This post-assessment checks what you have learned. There are 5 questions. Each question carries 1 mark. Your answers and score will be submitted to your teacher.</div>
+  <div class="fields">
+    <div class="field"><label for="student">Student Name *</label><input id="student" type="text" autocomplete="name" placeholder="Enter your name" required></div>
+    <div class="field"><label for="className">Class *</label><input id="className" type="text" placeholder="Enter your class" required></div>
+  </div>
+</section>
+
+<section class="panel">
+  <div class="head"><div class="num">02</div><div><h2>Post-Assessment Questions</h2><div class="sub">Choose the best answer for each question.</div></div></div>
+
+  <div class="question"><h3>Q1. A rectangle has a length of 8 cm and a width of 5 cm. What is its area?</h3><div class="options">
+    <label class="option"><input type="radio" name="q1" value="A"> A. 13 cm²</label><label class="option"><input type="radio" name="q1" value="B"> B. 40 cm²</label>
+    <label class="option"><input type="radio" name="q1" value="C"> C. 26 cm²</label><label class="option"><input type="radio" name="q1" value="D"> D. 80 cm²</label>
+  </div></div>
+
+  <div class="question"><h3>Q2. A square has a side length of 6 cm. What is its area?</h3><div class="options">
+    <label class="option"><input type="radio" name="q2" value="A"> A. 12 cm²</label><label class="option"><input type="radio" name="q2" value="B"> B. 24 cm²</label>
+    <label class="option"><input type="radio" name="q2" value="C"> C. 36 cm²</label><label class="option"><input type="radio" name="q2" value="D"> D. 30 cm²</label>
+  </div></div>
+
+  <div class="question"><h3>Q3. A rectangle is 7 cm long and 4 cm wide. What is its perimeter?</h3><div class="options">
+    <label class="option"><input type="radio" name="q3" value="A"> A. 22 cm</label><label class="option"><input type="radio" name="q3" value="B"> B. 28 cm</label>
+    <label class="option"><input type="radio" name="q3" value="C"> C. 11 cm</label><label class="option"><input type="radio" name="q3" value="D"> D. 18 cm</label>
+  </div></div>
+
+  <div class="question"><h3>Q4. A combined shape is made from two non-overlapping rectangles. The first rectangle has an area of 5 × 3 cm² and the second has an area of 2 × 3 cm². What is the total area?</h3><div class="options">
+    <label class="option"><input type="radio" name="q4" value="A"> A. 15 cm²</label><label class="option"><input type="radio" name="q4" value="B"> B. 6 cm²</label>
+    <label class="option"><input type="radio" name="q4" value="C"> C. 30 cm²</label><label class="option"><input type="radio" name="q4" value="D"> D. 21 cm²</label>
+  </div></div>
+
+  <div class="question"><h3>Q5. What is the correct method to find the area of a combined shape made of two non-overlapping rectangles?</h3><div class="options">
+    <label class="option"><input type="radio" name="q5" value="A"> A. Multiply the two perimeters.</label><label class="option"><input type="radio" name="q5" value="B"> B. Find each rectangle's area and add them.</label>
+    <label class="option"><input type="radio" name="q5" value="C"> C. Add all side lengths only.</label><label class="option"><input type="radio" name="q5" value="D"> D. Subtract the widths from the lengths.</label>
+  </div></div>
+
+  <div class="actions">
+    <button class="primary" id="submitBtn" onclick="submitAssessment()">Submit Post-Assessment</button>
+    <button class="soft" onclick="resetAssessment()">Try Again</button>
+  </div>
+  <div class="result" id="result" aria-live="polite"></div>
+  <p class="note">Your submission is sent to your teacher's Google Sheets. Please submit only once unless your teacher asks you to retry.</p>
+</section>
+<div class="footer">Learn · Apply · Demonstrate · Achieve</div>
+</div>
+
+<script>
+// IMPORTANT: Replace this placeholder with your deployed Apps Script Web App URL ending in /exec.
+const SCRIPT_URL = "PASTE_YOUR_POST_ASSESSMENT_WEB_APP_URL_HERE";
+
+async function submitAssessment(){
+  const name=document.getElementById("student").value.trim();
+  const className=document.getElementById("className").value.trim();
+  const answers={};
+  for(let i=1;i<=5;i++){
+    const selected=document.querySelector('input[name="q'+i+'"]:checked');
+    if(!selected){showMessage("Please answer all 5 questions before submitting.");return;}
+    answers["q"+i]=selected.value;
+  }
+  if(!name||!className){showMessage("Please enter your name and class before submitting.");return;}
+  if(SCRIPT_URL==="PASTE_YOUR_POST_ASSESSMENT_WEB_APP_URL_HERE"){
+    showMessage("The teacher still needs to connect the Google Apps Script Web App URL. Your answers have not been submitted yet.");return;
+  }
+
+  const btn=document.getElementById("submitBtn");
+  btn.disabled=true;btn.textContent="Submitting...";
+  try{
+    // no-cors avoids a browser preflight. The endpoint validates and scores the answers server-side.
+    await fetch(SCRIPT_URL,{
+      method:"POST",
+      mode:"no-cors",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({name,className,answers})
+    });
+    const key={q1:"B",q2:"C",q3:"A",q4:"D",q5:"B"};
+    let score=0;
+    Object.keys(key).forEach(k=>{if(answers[k]===key[k])score++;});
+    const result=document.getElementById("result");
+    result.className="result show";
+    result.innerHTML='<div class="score">'+score+' / 5</div><strong>Thank you, '+escapeHtml(name)+'!</strong><p>Your submission has been sent. Your teacher can check the response in Google Sheets.</p>';
+    result.scrollIntoView({behavior:"smooth",block:"nearest"});
+    document.querySelectorAll('input[type=radio],#student,#className').forEach(el=>el.disabled=true);
+    btn.textContent="Submitted";
+  }catch(err){
+    showMessage("We could not send your answers. Please check your internet connection and try again.");
+    btn.disabled=false;btn.textContent="Submit Post-Assessment";
+  }
+}
+function showMessage(message){const r=document.getElementById("result");r.className="result show";r.textContent=message;}
+function resetAssessment(){document.querySelectorAll('input[type=radio]').forEach(x=>{x.checked=false;x.disabled=false;});document.getElementById("student").disabled=false;document.getElementById("className").disabled=false;document.getElementById("student").value="";document.getElementById("className").value="";const r=document.getElementById("result");r.className="result";r.textContent="";const b=document.getElementById("submitBtn");b.disabled=false;b.textContent="Submit Post-Assessment";}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+</script>
+</body></html>
