@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Detective Challenge</title>
+<style>
+:root{--ink:#26324b;--muted:#68748a;--purple:#7867d8;--teal:#329b91;--orange:#df8b43;--line:rgba(112,126,160,.22)}
+*{box-sizing:border-box}html,body{margin:0;background:transparent}body{padding:20px;font-family:Arial,sans-serif;color:var(--ink)}
+.wrap{max-width:900px;margin:auto}.hero,.challenge{border:1px solid var(--line);border-radius:23px;background:rgba(255,255,255,.75);backdrop-filter:blur(12px)}
+.hero{text-align:center;padding:26px 20px}.tag{display:inline-block;padding:7px 13px;border-radius:30px;background:#eeeaff;color:#5d4db7;font-size:11px;font-weight:bold;letter-spacing:1px}
+h1{font-size:clamp(27px,5vw,40px);margin:13px 0 8px}.hero p{color:var(--muted);line-height:1.6;margin:0}
+.challenge{margin-top:18px;padding:22px;box-shadow:0 12px 30px #36426912}
+.claim{display:flex;gap:14px;align-items:center;padding:17px;border-radius:16px;background:rgba(255,235,210,.65);border:1px solid #df8b4340}
+.robot{font-size:35px}.small{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#bd742e;font-weight:bold}.statement{font-size:17px;font-weight:bold;line-height:1.5;margin-top:5px}
+h2{font-size:18px;margin:22px 0 12px}.questions{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.q{padding:14px;border:1px solid var(--line);border-radius:15px;background:#f9faffb8}.q label{display:block;font-size:13px;font-weight:bold;margin-bottom:8px}
+textarea{width:100%;min-height:82px;resize:vertical;padding:10px;border:1px solid #aeb8ce66;border-radius:10px;font:13px Arial;color:var(--ink);background:#ffffffd9}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}button{border:0;border-radius:11px;padding:12px 15px;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(1.04);transform:translateY(-1px)}.primary{background:var(--purple);color:white}.copy{background:var(--teal);color:white}.open{background:#eeeaff;color:#5d4db7}
+.answer{display:none;margin-top:17px;padding:16px;border-radius:15px;background:#54b9a51a;border:1px solid #54b9a559;line-height:1.6;font-size:14px}.answer.show{display:block}
+.formula{font-size:21px;font-weight:bold;color:#267e70;margin:8px 0}.tip{margin-top:16px;padding:14px 16px;border-radius:14px;background:#7867d812;color:#55517d;font-size:13px;line-height:1.55}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,15px);opacity:0;background:#26324b;color:white;padding:11px 16px;border-radius:30px;font-size:13px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:650px){body{padding:12px}.challenge{padding:15px}.questions{grid-template-columns:1fr}.claim{align-items:flex-start}}
+</style></head><body><div class="wrap">
+<header class="hero"><div class="tag">SECTION 4 · THINK CRITICALLY WITH AI</div><h1>AI Detective Challenge 🕵️</h1><p>Can you check whether AI is giving correct mathematical information? Think, calculate and explain your reasoning before revealing the answer.</p></header>
+<main class="challenge">
+<div class="claim"><div class="robot">🤖</div><div><div class="small">AI says...</div><div class="statement">“A rectangle with a length of 8 cm and width of 5 cm has an area of 40 cm².”</div></div></div>
+<h2>Your detective mission 🔎</h2>
+<div class="questions">
+<div class="q"><label for="q1">1. Is AI correct?</label><textarea id="q1" placeholder="Write Yes or No, and give a reason..."></textarea></div>
+<div class="q"><label for="q2">2. How can you verify the answer?</label><textarea id="q2" placeholder="Describe how you can check it..."></textarea></div>
+<div class="q"><label for="q3">3. What mathematical formula should you use?</label><textarea id="q3" placeholder="Write the formula..."></textarea></div>
+<div class="q"><label for="q4">4. Explain why the answer is correct or incorrect.</label><textarea id="q4" placeholder="Explain your mathematical reasoning..."></textarea></div>
+</div>
+<div class="actions"><button class="primary" onclick="reveal()">🔍 Reveal Answer</button><button class="copy" onclick="copyPrompt()">📋 Copy AI Challenge Prompt</button><button class="open" onclick="window.open('https://chatgpt.com/','_blank','noopener,noreferrer')">↗ Open ChatGPT</button></div>
+<div class="answer" id="answer"><b>Case solved! AI is correct. ✅</b><div class="formula">A = length × width<br>A = 8 × 5 = 40 cm²</div>The area of a rectangle is found by multiplying its length by its width. Since 8 × 5 = 40, AI's answer is correct. Remember to include the square unit, cm², because area measures a surface.</div>
+<div class="tip"><b>🌟 Detective reminder:</b> Do not believe AI immediately. Verify its answer using a mathematical formula, your own calculation and clear reasoning.</div>
+</main></div><div class="toast" id="toast">Prompt copied! Paste it into ChatGPT.</div>
+<script>
+function reveal(){document.getElementById('answer').classList.add('show');document.getElementById('answer').scrollIntoView({behavior:'smooth',block:'nearest'});}
+async function copyPrompt(){let p='I am a Year 5 student completing an AI Detective Challenge in Mathematics. AI says: "A rectangle with a length of 8 cm and width of 5 cm has an area of 40 cm²." Please act as a learning coach. Ask me to decide whether AI is correct, explain how I can verify the answer, identify the formula for the area of a rectangle, and explain my reasoning. Do not reveal the answer immediately. Give me one question at a time and help me think critically.';try{await navigator.clipboard.writeText(p)}catch(e){let a=document.createElement('textarea');a.value=p;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}let t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+</script></body></html>
