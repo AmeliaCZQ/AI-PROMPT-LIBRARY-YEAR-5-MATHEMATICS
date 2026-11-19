@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assessment Centre | Year 5 Mathematics</title>
+<style>
+:root{--ink:#26324b;--muted:#68748a;--purple:#7867d8;--teal:#329b91;--orange:#df8b43;--line:rgba(112,126,160,.22)}
+*{box-sizing:border-box}html,body{margin:0;background:transparent}
+body{padding:22px;font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink)}
+.wrap{max-width:980px;margin:auto}
+.hero,.panel{border:1px solid var(--line);border-radius:23px;background:rgba(255,255,255,.76);backdrop-filter:blur(13px);box-shadow:0 12px 30px rgba(54,66,105,.06)}
+.hero{text-align:center;padding:29px 22px;margin-bottom:18px}
+.kicker{display:inline-block;padding:7px 13px;border-radius:999px;background:rgba(120,103,216,.12);color:#5d4db7;font-size:11px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}
+h1{font-size:clamp(28px,5vw,42px);margin:13px 0 8px}
+.hero p{max-width:700px;margin:0 auto;color:var(--muted);line-height:1.65}
+.pill-row{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:17px}
+.pill{padding:8px 12px;border-radius:30px;background:rgba(120,103,216,.09);color:#5d5594;font-size:12px;font-weight:750}
+.panel{padding:23px;margin-top:17px}
+.section-head{display:flex;gap:13px;align-items:center;margin-bottom:15px}
+.num{display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:14px;background:rgba(120,103,216,.13);color:#5d4db7;font-weight:900}
+h2{font-size:21px;margin:0 0 5px}.sub{font-size:13px;color:var(--muted);line-height:1.5}
+.intro{padding:16px;border-radius:15px;background:rgba(120,103,216,.07);line-height:1.6;font-size:14px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:17px 0}
+.field label{display:block;font-size:12px;font-weight:800;margin-bottom:7px}
+.field input{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.8);font:14px Arial;color:var(--ink)}
+.question{padding:16px;border:1px solid var(--line);border-radius:16px;margin-top:12px;background:rgba(250,251,255,.68)}
+.question h3{font-size:14px;line-height:1.5;margin:0 0 12px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.option{display:flex;align-items:center;gap:9px;padding:10px 11px;border:1px solid rgba(112,126,160,.2);border-radius:11px;background:rgba(255,255,255,.75);font-size:13px;cursor:pointer}
+.option:has(input:checked){border-color:#9587e7;background:rgba(120,103,216,.09)}
+.option input{accent-color:var(--purple)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}
+button,.linkbtn{border:0;border-radius:11px;padding:12px 16px;font-weight:800;font-size:13px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+button:hover,.linkbtn:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.primary{background:var(--purple);color:#fff}.secondary{background:rgba(50,155,145,.13);color:#287e76;border:1px solid rgba(50,155,145,.22)}.soft{background:rgba(120,103,216,.1);color:#5d4db7;border:1px solid rgba(120,103,216,.18)}
+.result{display:none;margin-top:16px;padding:17px;border-radius:15px;background:rgba(84,185,165,.1);border:1px solid rgba(84,185,165,.35);font-size:14px;line-height:1.6}
+.result.show{display:block}.score{font-size:25px;font-weight:900;color:#287e76}
+.feedback{margin-top:12px;padding-top:10px;border-top:1px solid rgba(84,185,165,.25)}
+.note{font-size:12px;color:var(--muted);line-height:1.55;margin-top:13px}
+.footer{text-align:center;color:var(--muted);font-size:11px;margin:18px 0 3px}
+@media(max-width:680px){body{padding:12px}.panel{padding:16px}.fields,.options{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+<header class="hero">
+<div class="kicker">Year 5 Mathematics · Check your progress</div>
+<h1>ASSESSMENT CENTRE</h1>
+<p><strong>Check Your Understanding. Track Your Progress.</strong><br>Complete the assessments to evaluate your understanding of shapes, combined shapes, perimeter and area. Take your time, read carefully and do your best!</p>
+<div class="pill-row"><span class="pill">✏️ Pre-Assessment</span><span class="pill">📈 Track Your Progress</span></div>
+</header>
+
+<section class="panel">
+<div class="section-head"><div class="num">01</div><div><h2>Introduction</h2><div class="sub">Welcome to the Assessment Centre!</div></div></div>
+<div class="intro">This assessment centre helps you check what you already know before learning and test what you have understood afterwards. Read each question carefully and try your best. Remember: mistakes are opportunities to learn!</div>
+</section>
+
+<section class="panel" id="preassessment">
+<div class="section-head"><div class="num">02</div><div><h2>Pre-Assessment</h2><div class="sub">Before Learning — Let's See What You Know!</div></div></div>
+<p class="sub">This short assessment checks your prior knowledge of shape identification, basic perimeter, basic area and combined shapes.</p>
+<div class="fields">
+<div class="field"><label for="student">Student Name</label><input id="student" type="text" placeholder="Enter your name"></div>
+<div class="field"><label for="className">Class</label><input id="className" type="text" placeholder="Enter your class"></div>
+</div>
+<div class="question"><h3>Q1. What is the perimeter of a square with a side length of 5 cm?</h3><div class="options">
+<label class="option"><input type="radio" name="q1" value="A"> A. 10 cm</label><label class="option"><input type="radio" name="q1" value="B"> B. 15 cm</label><label class="option"><input type="radio" name="q1" value="C"> C. 20 cm</label><label class="option"><input type="radio" name="q1" value="D"> D. 25 cm</label></div></div>
+<div class="question"><h3>Q2. What is the area of a rectangle with a length of 6 cm and width of 4 cm?</h3><div class="options">
+<label class="option"><input type="radio" name="q2" value="A"> A. 10 cm²</label><label class="option"><input type="radio" name="q2" value="B"> B. 20 cm²</label><label class="option"><input type="radio" name="q2" value="C"> C. 24 cm²</label><label class="option"><input type="radio" name="q2" value="D"> D. 28 cm²</label></div></div>
+<div class="question"><h3>Q3. What does perimeter measure?</h3><div class="options">
+<label class="option"><input type="radio" name="q3" value="A"> A. The space inside a shape.</label><label class="option"><input type="radio" name="q3" value="B"> B. The distance around a shape.</label><label class="option"><input type="radio" name="q3" value="C"> C. The number of corners.</label><label class="option"><input type="radio" name="q3" value="D"> D. The number of shapes.</label></div></div>
+<div class="actions"><button class="primary" onclick="markPreAssessment()">Submit Pre-Assessment</button><button class="soft" onclick="resetQuiz()">Try Again</button></div>
+<div class="result" id="result" aria-live="polite"></div>
+<p class="note">Teacher note: This sample pre-assessment is built into this page. If you prefer to collect student names and responses in Google Forms, you can replace this quiz area with your Google Form embed.</p>
+</section>
+
+
+<div class="footer">Learn · Practise · Reflect · Improve</div>
+</div>
+<script>
+function markPreAssessment(){
+const answers={q1:"C",q2:"C",q3:"B"};let score=0,unanswered=[];
+Object.keys(answers).forEach(k=>{const selected=document.querySelector('input[name="'+k+'"]:checked');if(!selected)unanswered.push(k);else if(selected.value===answers[k])score++;});
+const result=document.getElementById('result');
+if(unanswered.length){result.className='result show';result.innerHTML='<strong>Please answer all three questions before submitting.</strong>';return;}
+const name=document.getElementById('student').value.trim();
+const className=document.getElementById('className').value.trim();
+let message=score===3?'Excellent start! You have a strong foundation.':score===2?'Good effort! Review the explanation for the question you missed.':'Good try! Use the feedback below to revise the key ideas.';
+result.className='result show';
+result.innerHTML='<div class="score">'+score+' / 3</div><strong>Pre-Assessment completed'+(name?' by '+escapeHtml(name):'')+(className?' · '+escapeHtml(className):'')+'</strong><p>'+message+'</p><div class="feedback"><b>Answer check:</b><br>Q1: C — A square has 4 equal sides, so its perimeter is 4 × 5 = 20 cm.<br>Q2: C — Area of a rectangle = length × width, so 6 × 4 = 24 cm².<br>Q3: B — Perimeter is the distance around a shape.</div>';
+result.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function resetQuiz(){document.querySelectorAll('input[type=radio]').forEach(x=>x.checked=false);document.getElementById('student').value='';document.getElementById('className').value='';document.getElementById('result').className='result';document.getElementById('result').innerHTML='';}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+</script></body></html>
